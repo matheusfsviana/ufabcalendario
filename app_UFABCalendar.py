@@ -39,7 +39,7 @@ def set_bg_hack(main_bg):
          }}
          /* Deixa o fundo dos containers semi-transparentes para ler o texto */
          .stTextArea, .stFileUploader, div[data-testid="stExpander"] {{
-             background-color: rgba(0, 0, 0, 0.9); 
+             background-color: rgba(0, 0, 0, 0.5); 
              border-radius: 10px;
              padding: 10px;
          }}
@@ -314,6 +314,7 @@ with col2:
     # Substitua os links abaixo pelos seus reais
     st.link_button("🚀 LinkedIn", "https://www.linkedin.com/in/mattviana", use_container_width=True)
     st.link_button("💬 Contato WhatsApp", "https://wa.me/5511963598361", use_container_width=True)
+
 
 
 
