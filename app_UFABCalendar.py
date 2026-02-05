@@ -244,7 +244,18 @@ status_msg = st.empty()
 # 1. Tenta carregar o PDF padrão da pasta local
 if os.path.exists(ARQUIVO_PDF_PADRAO):
     pdf_source = ARQUIVO_PDF_PADRAO
-    status_msg.success(f"📚 Base de dados carregada: {ARQUIVO_PDF_PADRAO}")
+    status_msg.markdown(f"""
+    <div style="
+        background-color: rgba(0, 0, 0, 0.85); 
+        border: 1px solid #00FF00; 
+        color: #FFFFFF; 
+        padding: 15px; 
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 20px;">
+        📚 Base de dados carregada: <b>{ARQUIVO_PDF_PADRAO}</b>
+    </div>
+""", unsafe_allow_html=True)
 else:
     # 2. Se não achar (ex: mudou o nome ou não subiu no git), pede upload
     status_msg.warning("⚠️ Arquivo de turmas padrão não encontrado. Por favor, faça o upload.")
@@ -314,6 +325,7 @@ with col2:
     # Substitua os links abaixo pelos seus reais
     st.link_button("🚀 LinkedIn", "https://www.linkedin.com/in/mattviana", use_container_width=True)
     st.link_button("💬 Contato WhatsApp", "https://wa.me/5511963598361", use_container_width=True)
+
 
 
 
