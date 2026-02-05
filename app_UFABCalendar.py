@@ -52,7 +52,7 @@ def set_bg_hack(main_bg):
 # Tenta carregar, se der erro (arquivo não existe), segue sem imagem para não quebrar
 try:
     # Sidebar Logo (Recurso novo do Streamlit)
-    st.logo("assets/logo.png", icon_image="assets/icone.png") 
+    st.logo("assets/logo.png", icon_image="assets/icon.png") 
     
     # Fundo de tela
     set_bg_hack('assets/calendar_background.jpg')
@@ -314,6 +314,7 @@ with col2:
     # Substitua os links abaixo pelos seus reais
     st.link_button("🚀 LinkedIn", "https://www.linkedin.com/in/mattviana", use_container_width=True)
     st.link_button("💬 Contato WhatsApp", "https://wa.me/5511963598361", use_container_width=True)
+
 
 
 
