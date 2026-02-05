@@ -173,17 +173,20 @@ def extract_specific_room(raw_text, day_of_week):
     return "Verificar PDF"
 
 def generate_ics_rrule(disciplines, start_date, end_date):
-    """Gera o calendário."""
+    """Gera o calendário (Versão Corrigida: datetime.combine)."""
     c = Calendar()
     weekdays = {'segunda': 0, 'terça': 1, 'quarta': 2, 'quinta': 3, 'sexta': 4, 'sábado': 5, 'domingo': 6}
     
-    # Converter para datetime completo se vier apenas date
-    if isinstance(start_date, type(datetime.date)):
-        start_date = datetime.combine(start_date, time.min)
-    if isinstance(end_date, type(datetime.date)):
-        end_date = datetime.combine(end_date, time.max)
+    # 1. Garante que start_date e end_date sejam apenas DATA (sem hora) para cálculos de dia
+    # Se vier datetime, extrai a data. Se vier date, mantém.
+    if isinstance(start_date, datetime):
+        start_date = start_date.date()
+    if isinstance(end_date, datetime):
+        end_date = end_date.date()
 
-    end_date_utc = end_date.replace(hour=23, minute=59, second=59).astimezone(TZ_UTC)
+    # Define o limite UTC para a regra de recorrência
+    # Aqui precisamos transformar em datetime completo novamente
+    end_date_utc = datetime.combine(end_date, time(23, 59, 59)).replace(tzinfo=TZ_BR).astimezone(TZ_UTC)
     until_str = end_date_utc.strftime('%Y%m%dT%H%M%SZ')
 
     for disc in disciplines:
@@ -191,26 +194,35 @@ def generate_ics_rrule(disciplines, start_date, end_date):
             wd_name = sched['day'].split('-')[0]
             wd_num = weekdays.get(wd_name, 0)
             
+            # Cálculo dos dias até a primeira aula
             days_ahead = wd_num - start_date.weekday()
             if days_ahead < 0: days_ahead += 7
-            first_occurrence = start_date + timedelta(days=days_ahead)
+            first_occurrence_date = start_date + timedelta(days=days_ahead)
             
+            # Ajuste Quinzenal (Lógica de Datas)
             interval = 1
             freq_str = "Semanal"
             if 'quinzenal' in sched['freq']:
                 interval = 2
                 freq_str = "Quinzenal"
                 if '(ii)' in sched['freq'] or ' ii' in sched['freq']:
-                    first_occurrence += timedelta(days=7)
+                    first_occurrence_date += timedelta(days=7)
                     freq_str = "Quinzenal II"
                 elif '(i)' in sched['freq'] or ' i' in sched['freq']:
                     freq_str = "Quinzenal I"
 
+            # 2. A CORREÇÃO PRINCIPAL ESTÁ AQUI:
+            # Em vez de .replace(), usamos datetime.combine
             h_start, m_start = map(int, sched['start'].split(':'))
             h_end, m_end = map(int, sched['end'].split(':'))
             
-            event_start = first_occurrence.replace(hour=h_start, minute=m_start, tzinfo=TZ_BR)
-            event_end = first_occurrence.replace(hour=h_end, minute=m_end, tzinfo=TZ_BR)
+            # Cria o datetime final juntando a DATA calculada com o HORÁRIO da aula
+            event_start = datetime.combine(first_occurrence_date, time(h_start, m_start))
+            event_end = datetime.combine(first_occurrence_date, time(h_end, m_end))
+            
+            # Aplica o Fuso Horário
+            event_start = TZ_BR.localize(event_start)
+            event_end = TZ_BR.localize(event_end)
             
             clean_room = extract_specific_room(disc.get('room_raw', ''), wd_name)
 
@@ -226,6 +238,7 @@ def generate_ics_rrule(disciplines, start_date, end_date):
             c.events.add(e)
 
     return c
+
 
 # ==========================================
 # INTERFACE DO USUÁRIO
