@@ -255,7 +255,7 @@ st.divider()  # Linha divisória para separar o app do rodapé
 
 st.markdown("""
 <div style="text-align: center;">
-    <p>Desenvolvido por <b>Seu Nome</b> | Data Architect & Engineer</p>
+    <p>Desenvolvido por <b>Matheus Viana</b> | Data Architect & Engineer</p>
     <p>Encontrou um erro ou tem uma sugestão? Entre em contato!</p>
 </div>
 """, unsafe_allow_html=True)
@@ -266,4 +266,5 @@ with col2:
     # Substitua os links abaixo pelos seus reais
     st.link_button("🚀 LinkedIn", "https://www.linkedin.com/in/mattviana", use_container_width=True)
     st.link_button("💬 Contato WhatsApp", "https://wa.me/5511963598361", use_container_width=True)
+
 
