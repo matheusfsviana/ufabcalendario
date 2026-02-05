@@ -245,4 +245,24 @@ if st.button("Gerar Meu Calendário", type="primary", use_container_width=True):
             except Exception as e:
                 st.error(f"Ocorreu um erro técnico: {e}")
     else:
+
         st.warning("Precisamos do texto da matrícula e do PDF carregado para continuar.")
+
+# ==========================================
+# RODAPÉ DE CONTATO
+# ==========================================
+st.divider()  # Linha divisória para separar o app do rodapé
+
+st.markdown("""
+<div style="text-align: center;">
+    <p>Desenvolvido por <b>Seu Nome</b> | Data Architect & Engineer</p>
+    <p>Encontrou um erro ou tem uma sugestão? Entre em contato!</p>
+</div>
+""", unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns([1, 2, 1])
+
+with col2:
+    # Substitua os links abaixo pelos seus reais
+    st.link_button("🚀 LinkedIn", "www.linkedin.com/in/mattviana", use_container_width=True)
+    st.link_button("💬 Contato WhatsApp", "https://wa.me/5511963598361", use_container_width=True)
