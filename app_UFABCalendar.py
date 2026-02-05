@@ -264,5 +264,6 @@ col1, col2, col3 = st.columns([1, 2, 1])
 
 with col2:
     # Substitua os links abaixo pelos seus reais
-    st.link_button("🚀 LinkedIn", "www.linkedin.com/in/mattviana", use_container_width=True)
+    st.link_button("🚀 LinkedIn", "https://www.linkedin.com/in/mattviana", use_container_width=True)
     st.link_button("💬 Contato WhatsApp", "https://wa.me/5511963598361", use_container_width=True)
+
