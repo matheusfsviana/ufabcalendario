@@ -7,6 +7,57 @@ from ics import Calendar, Event
 from ics.grammar.parse import ContentLine
 from datetime import datetime, timedelta, time
 import pytz
+import base64
+
+# ==========================================
+# 🎨 CONFIGURAÇÃO VISUAL E ASSETS
+# ==========================================
+
+# 1. Configuração da Página (Título e Ícone da aba)
+st.set_page_config(
+    page_title="UFABCalendar",
+    page_icon="assets/icon.png", # Caminho do seu ícone
+    layout="centered"
+)
+
+# 2. Função para o Fundo de Tela (CSS Hack)
+def set_bg_hack(main_bg):
+    '''
+    Uma função para descompactar uma imagem e jogá-la no fundo via CSS
+    '''
+    # set bg name
+    main_bg_ext = "png"
+    
+    st.markdown(
+         f"""
+         <style>
+         .stApp {{
+             background: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()});
+             background-size: cover;
+             background-repeat: no-repeat;
+             background-attachment: fixed;
+         }}
+         /* Deixa o fundo dos containers semi-transparentes para ler o texto */
+         .stTextArea, .stFileUploader, div[data-testid="stExpander"] {{
+             background-color: rgba(255, 255, 255, 0.9); 
+             border-radius: 10px;
+             padding: 10px;
+         }}
+         </style>
+         """,
+         unsafe_allow_html=True
+     )
+
+# 3. Aplicar as imagens (Coloque isso LOGO APÓS os imports e configs)
+# Tenta carregar, se der erro (arquivo não existe), segue sem imagem para não quebrar
+try:
+    # Sidebar Logo (Recurso novo do Streamlit)
+    st.logo("assets/logo.png", icon_image="assets/icone.png") 
+    
+    # Fundo de tela
+    set_bg_hack('assets/calendar_background.jpg')
+except FileNotFoundError:
+    pass # Se não tiver imagem, vida que segue
 
 # ==========================================
 # 🔧 CONFIGURAÇÕES DO QUADRIMESTRE (EDITE AQUI ANUALMENTE)
@@ -18,9 +69,6 @@ ARQUIVO_PDF_PADRAO = "turmas_salas_docentes_2026_1.pdf"
 DATA_INICIO_AULAS = datetime(2026, 2, 2)
 DATA_FIM_AULAS = datetime(2026, 4, 25)
 # ==========================================
-
-st.set_page_config(page_title="Calendário UFABC - Comunidade", layout="centered")
-
 # Timezones
 TZ_BR = pytz.timezone("America/Sao_Paulo")
 TZ_UTC = pytz.utc
@@ -266,5 +314,6 @@ with col2:
     # Substitua os links abaixo pelos seus reais
     st.link_button("🚀 LinkedIn", "https://www.linkedin.com/in/mattviana", use_container_width=True)
     st.link_button("💬 Contato WhatsApp", "https://wa.me/5511963598361", use_container_width=True)
+
 
 
