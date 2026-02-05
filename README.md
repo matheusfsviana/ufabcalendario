@@ -5,7 +5,7 @@ Ferramenta simples para converter o "Resumo de Matrícula" da UFABC em um arquiv
 ## 🚀 Como usar
 
 Acesse a versão online (não requer instalação):
-**[🔗 Clique aqui para abrir a ferramenta](COLOCAR_SEU_LINK_DO_STREAMLIT_AQUI)**
+**[🔗 Clique aqui para abrir a ferramenta](https://ufabcalendar.streamlit.app/)**
 
 1. Cole o texto do seu resumo de matrícula.
 2. O sistema cruza os dados com o PDF oficial de turmas.
