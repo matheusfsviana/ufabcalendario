@@ -231,7 +231,7 @@ def generate_ics_rrule(disciplines, start_date, end_date):
 # INTERFACE DO USUÁRIO
 # ==========================================
 
-st.title("📅 UFABCalendar 📅 <br> Gerador de Calendário")
+st.title("📅 UFABCalendar 📅 <br> Gerador de Calendário", unsafe_allow_html=True)
 st.markdown("""
 Cole o texto do seu **Resumo de Matrícula** abaixo para gerar sua agenda automaticamente.
 As informações de salas e professores serão cruzadas com a base oficial.
@@ -314,6 +314,7 @@ with col2:
     # Substitua os links abaixo pelos seus reais
     st.link_button("🚀 LinkedIn", "https://www.linkedin.com/in/mattviana", use_container_width=True)
     st.link_button("💬 Contato WhatsApp", "https://wa.me/5511963598361", use_container_width=True)
+
 
 
 
