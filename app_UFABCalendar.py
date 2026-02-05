@@ -246,8 +246,7 @@ if os.path.exists(ARQUIVO_PDF_PADRAO):
     pdf_source = ARQUIVO_PDF_PADRAO
     status_msg.markdown(f"""
     <div style="
-        background-color: rgba(0, 0, 0, 0.85); 
-        border: 1px solid #00FF00; 
+        background-color: rgba(0, 0, 0, 0.2); 
         color: #FFFFFF; 
         padding: 15px; 
         border-radius: 10px;
@@ -325,6 +324,7 @@ with col2:
     # Substitua os links abaixo pelos seus reais
     st.link_button("🚀 LinkedIn", "https://www.linkedin.com/in/mattviana", use_container_width=True)
     st.link_button("💬 Contato WhatsApp", "https://wa.me/5511963598361", use_container_width=True)
+
 
 
 
