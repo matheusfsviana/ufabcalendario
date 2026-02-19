@@ -3,3 +3,4 @@ pdfplumber
 pandas
 ics
 pytz
+tatsu==5.14.0
