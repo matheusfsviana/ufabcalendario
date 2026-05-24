@@ -63,11 +63,11 @@ except FileNotFoundError:
 # 🔧 CONFIGURAÇÕES DO QUADRIMESTRE (EDITE AQUI ANUALMENTE)
 # ==========================================
 # Nome exato do arquivo PDF que deve estar na mesma pasta deste script no GitHub
-ARQUIVO_PDF_PADRAO = "turmas_salas_docentes_2026_1.pdf"
+ARQUIVO_PDF_PADRAO = "turmas_salas_docentes_2026_2.pdf"
 
 # Datas de início e fim das aulas (Ano, Mês, Dia)
-DATA_INICIO_AULAS = datetime(2026, 2, 2)
-DATA_FIM_AULAS = datetime(2026, 4, 25)
+DATA_INICIO_AULAS = datetime(2026, 5, 25)
+DATA_FIM_AULAS = datetime(2026, 8, 24)
 # ==========================================
 # Timezones
 TZ_BR = pytz.timezone("America/Sao_Paulo")
